@@ -4,7 +4,7 @@ OBJS =  project01.o
 %.o: %.c
 	gcc -c -g -o $@ $<
 
-$(PROG): $(OBJS)
+$(PROG): project01.h $(OBJS)
 	gcc -g -o $@ $^
 
 clean:
