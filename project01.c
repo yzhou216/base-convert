@@ -112,6 +112,11 @@ int main(int argc, char **argv)
 	if (input_err == -1)
 		goto input_err;
 
+	char o_str[MAX_OUTPUT_BUF + PREFIX_LEN];
+	memset(o_str, 0, sizeof(o_str));
+	int_to_str(res, o_str, o_base);
+	printf("%s\n", o_str);
+
 	return 0;
 
 input_err:

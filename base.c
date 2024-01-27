@@ -1,8 +1,9 @@
 #include "project01.h"
 
-#include <string.h>
-
 #define MAX_INPUT_BUF 1024
+
+#define BIN_PREFIX "0b"
+#define HEX_PREFIX "0x"
 
 bool is_hex(char c)
 {
@@ -56,4 +57,33 @@ uint32_t str_to_int(char *str, int base)
 
 out:
 	return ret;
+}
+
+void int_to_str(uint32_t val, char *str, int base)
+{
+	if (base == 2) {
+		strncpy(str, BIN_PREFIX, PREFIX_LEN);
+		str += PREFIX_LEN;
+	} else if (base == 16) {
+		strncpy(str, HEX_PREFIX, PREFIX_LEN);
+		str += PREFIX_LEN;
+	}
+
+	char o_buf[MAX_OUTPUT_BUF];
+	memset(o_buf, 0, sizeof(o_buf));
+	char *end = o_buf;
+	while (val != 0) {
+		int quot = val / base;
+		int rem = val % base;
+		*end = rem + '0';
+		end++;
+		val = quot;
+	}
+	end--;
+
+	while (o_buf - 1 != end) {
+		*str = *end;
+		str++;
+		end--;
+	}
 }
