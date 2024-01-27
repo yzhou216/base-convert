@@ -75,7 +75,10 @@ void int_to_str(uint32_t val, char *str, int base)
 	while (val != 0) {
 		int quot = val / base;
 		int rem = val % base;
-		*end = rem + '0';
+		if (base == 16 && (rem >= 10 && rem <= 15))
+			*end = rem + '7'; /* convert to hex characters */
+		else
+			*end = rem + '0';
 		end++;
 		val = quot;
 	}
