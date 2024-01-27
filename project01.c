@@ -5,6 +5,64 @@
 #include <ctype.h>
 #include <stdbool.h>
 
+bool is_uc(char c)
+{
+	bool ret = false;
+	if (c >= 'A' && c <= 'Z')
+		ret = true;
+	return ret;
+}
+
+bool is_lc(char c)
+{
+	bool ret = false;
+	if (c >= 'a' && c <= 'z')
+		ret = true;
+	return ret;
+}
+
+bool is_letter(char c)
+{
+	bool ret = false;
+	if (is_uc(c) || is_lc(c))
+		ret = true;
+	return ret;
+}
+
+int parse_base(char **str)
+{
+	/* pointer arithmetic used to truncate prefixes bytes */
+	int base;
+	if (is_letter(**str))
+		goto input_err;
+
+	if (**str == '0') {
+		(*str)++; /* truncate '0' */
+		switch (**str) {
+		case 'B':
+		case 'b':
+			base = 2;
+			(*str)++; /* truncate 'b' */
+			break;
+		case 'X':
+		case 'x':
+			base = 16;
+			(*str)++; /* truncate 'x' */
+			break;
+		default:
+			goto input_err;
+		}
+	} else {
+		base = 10;
+	}
+
+	return base;
+
+input_err:
+	printf("Bad input\n");
+	exit(-1);
+}
+
 int main(int argc, char **argv)
 {
 	char *i_str; /* input string */
@@ -44,6 +102,8 @@ int main(int argc, char **argv)
 	}
 
 	i_str = argv[optind];
+
+	int i_base = parse_base(&i_str);
 
 	return 0;
 
