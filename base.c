@@ -33,6 +33,12 @@ uint32_t str_to_int(char *str, int base)
 		/* convert char to corresponding int using ASCII math */
 		char c = *end;
 		int digit;
+
+		if (base == 2 && (c != '0' && c != '1')) {
+			input_err = -1; /* error */
+			goto out;
+		}
+
 		if (base == 16 && is_letter(c)) {
 			if (!is_hex(c)) {
 				input_err = -1; /* error */
@@ -42,6 +48,7 @@ uint32_t str_to_int(char *str, int base)
 		} else {
 			digit = c - '0';
 		}
+
 		ret += digit * place_val;
 		place_val *= base;
 		end--;
