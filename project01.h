@@ -3,7 +3,11 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 
+bool is_uc(char c);
+bool is_lc(char c);
+bool is_letter(char c);
 uint32_t str_to_int(char *str, int base);
 
 #endif /* _PROJECT01_H */

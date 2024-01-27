@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
-#include <stdbool.h>
 
 bool is_uc(char c)
 {
