@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <ctype.h>
 
+int input_err = 0; /* input error when set to -1 */
+
 bool is_uc(char c)
 {
 	bool ret = false;
@@ -32,8 +34,10 @@ int parse_base(char **str)
 {
 	/* pointer arithmetic used to truncate prefixes bytes */
 	int base;
-	if (is_letter(**str))
-		goto input_err;
+	if (is_letter(**str)) {
+		base = -1; /* error */
+		goto out;
+	}
 
 	if (**str == '0') {
 		(*str)++; /* truncate '0' */
@@ -49,17 +53,15 @@ int parse_base(char **str)
 			(*str)++; /* truncate 'x' */
 			break;
 		default:
-			goto input_err;
+			base = -1; /* error */
+			goto out;
 		}
 	} else {
 		base = 10;
 	}
 
+out:
 	return base;
-
-input_err:
-	printf("Bad input\n");
-	exit(-1);
 }
 
 int main(int argc, char **argv)
@@ -103,9 +105,17 @@ int main(int argc, char **argv)
 	i_str = argv[optind];
 
 	int i_base = parse_base(&i_str);
+	if (i_base == -1)
+		goto input_err;
+
+	uint32_t res = str_to_int(i_str, i_base);
+	if (input_err == -1)
+		goto input_err;
 
 	return 0;
 
+input_err:
+	printf("Bad input\n");
 err:
 	exit(-1);
 }

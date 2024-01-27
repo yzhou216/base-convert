@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+extern int input_err;
 bool is_uc(char c);
 bool is_lc(char c);
 bool is_letter(char c);

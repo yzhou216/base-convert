@@ -35,7 +35,7 @@ uint32_t str_to_int(char *str, int base)
 		int digit;
 		if (base == 16 && is_letter(c)) {
 			if (!is_hex(c)) {
-				ret = -1; /* error */
+				input_err = -1; /* error */
 				goto out;
 			}
 			digit = convt_hex(c);
