@@ -1,5 +1,5 @@
 PROG = project01
-OBJS =  project01.o
+OBJS =  project01.o base.o
 
 %.o: %.c
 	gcc -c -g -o $@ $<
