@@ -82,6 +82,10 @@ void int_to_str(uint32_t val, char *str, int base)
 		end++;
 		val = quot;
 	}
+	/*
+	 * decrement the end pointer to the last character of o_buf string from
+	 * the null byte
+	 */
 	end--;
 
 	while (o_buf - 1 != end) {
