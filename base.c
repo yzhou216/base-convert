@@ -59,14 +59,14 @@ out:
 	return ret;
 }
 
-void int_to_str(uint32_t val, char *str, int base)
+void int_to_str(char *dest, uint32_t val, int base)
 {
 	if (base == 2) {
-		strncpy(str, BIN_PREFIX, PREFIX_LEN);
-		str += PREFIX_LEN;
+		strncpy(dest, BIN_PREFIX, PREFIX_LEN);
+		dest += PREFIX_LEN;
 	} else if (base == 16) {
-		strncpy(str, HEX_PREFIX, PREFIX_LEN);
-		str += PREFIX_LEN;
+		strncpy(dest, HEX_PREFIX, PREFIX_LEN);
+		dest += PREFIX_LEN;
 	}
 
 	char o_buf[MAX_OUTPUT_BUF];
@@ -89,8 +89,8 @@ void int_to_str(uint32_t val, char *str, int base)
 	end--;
 
 	while (o_buf - 1 != end) {
-		*str = *end;
-		str++;
+		*dest = *end;
+		dest++;
 		end--;
 	}
 }

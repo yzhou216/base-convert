@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 
 	char o_str[MAX_OUTPUT_BUF + PREFIX_LEN];
 	memset(o_str, 0, sizeof(o_str));
-	int_to_str(res, o_str, o_base);
+	int_to_str(o_str, res, o_base);
 	printf("%s\n", o_str);
 
 	return 0;

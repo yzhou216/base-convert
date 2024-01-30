@@ -13,6 +13,6 @@ bool is_uc(char c);
 bool is_lc(char c);
 bool is_letter(char c);
 int str_to_int(uint32_t *dest, char *str, int base);
-void int_to_str(uint32_t val, char *str, int base);
+void int_to_str(char *dest, uint32_t val, int base);
 
 #endif /* _BASEC_H */
