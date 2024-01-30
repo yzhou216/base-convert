@@ -4,8 +4,6 @@
 #include <unistd.h>
 #include <ctype.h>
 
-int input_err = 0; /* input error when set to -1 */
-
 bool is_uc(char c)
 {
 	bool ret = false;
@@ -108,8 +106,8 @@ int main(int argc, char **argv)
 	if (i_base == -1)
 		goto input_err;
 
-	uint32_t res = str_to_int(i_str, i_base);
-	if (input_err == -1)
+	uint32_t res;
+	if (str_to_int(&res, i_str, i_base) == -1)
 		goto input_err;
 
 	char o_str[MAX_OUTPUT_BUF + PREFIX_LEN];

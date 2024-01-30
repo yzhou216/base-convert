@@ -23,9 +23,9 @@ int convt_hex(char c)
 	return ret;
 }
 
-uint32_t str_to_int(char *str, int base)
+int str_to_int(uint32_t *dest, char *str, int base)
 {
-	uint32_t ret = 0;
+	int ret = 0;
 	int place_val = 1;
 
 	char *start = str;
@@ -36,13 +36,13 @@ uint32_t str_to_int(char *str, int base)
 		int digit;
 
 		if (base == 2 && (c != '0' && c != '1')) {
-			input_err = -1; /* error */
+			ret = -1; /* error */
 			goto out;
 		}
 
 		if (base == 16 && is_letter(c)) {
 			if (!is_hex(c)) {
-				input_err = -1; /* error */
+				ret = -1; /* error */
 				goto out;
 			}
 			digit = convt_hex(c);
@@ -50,7 +50,7 @@ uint32_t str_to_int(char *str, int base)
 			digit = c - '0';
 		}
 
-		ret += digit * place_val;
+		*dest += digit * place_val;
 		place_val *= base;
 		end--;
 	}
