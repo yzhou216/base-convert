@@ -1,5 +1,5 @@
-#ifndef _PROJECT01_H
-#define _PROJECT01_H
+#ifndef _BASEC_H
+#define _BASEC_H
 
 #include <stdio.h>
 #include <string.h>
@@ -16,4 +16,4 @@ bool is_letter(char c);
 uint32_t str_to_int(char *str, int base);
 void int_to_str(uint32_t val, char *str, int base);
 
-#endif /* _PROJECT01_H */
+#endif /* _BASEC_H */
