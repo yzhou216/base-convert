@@ -1,10 +1,10 @@
-PROG = project01
-OBJS =  project01.o base.o
+PROG = basec
+OBJS = basec.o base.o
 
 %.o: %.c
 	gcc -c -g -o $@ $<
 
-$(PROG): project01.h $(OBJS)
+$(PROG): basec.h $(OBJS)
 	gcc -g -o $@ $^
 
 clean:
